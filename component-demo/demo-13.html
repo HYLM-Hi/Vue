@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.18-beta.0/vue.js"></script>
+</head>
+<body>
+<div id="app">
+   hello vue
+</div>
+<script>
+    //手动挂载实例，可通过$mount来动态挂载，无需通过new Vue显示来创建，$mount('')可以是id，tag，class
+   const myComponent = Vue.extend({
+       template:"<div>form extend</div>"
+   });
+   new myComponent().$mount('#app');
+</script>
+</body>
+</html>

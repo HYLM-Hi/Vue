@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.18-beta.0/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    hello vue
+    <my-component :init-count="count"></my-component>
+</div>
+<script>
+    // // 全局注册
+    // Vue.component('my-component',{
+    //     template:"<div>这是一个组件</div>"
+    // });
+    // 局部注册
+    const Child = {
+        props:{
+            initCount:Number
+        },
+        template:'<div>这是一个局部注册的栗子{{message}}{{count}}</div>',
+        data () {
+            return{
+                message:'hello hello',
+                count:this.initCount
+            }
+        },
+        methods:{
+            change() {
+                this.count = 2
+            }
+        }
+    };
+    new Vue({
+        el:'#app',
+        components: {
+            'my-component' : Child
+        },
+        data:{
+            count: 1
+        }
+    })
+</script>
+</body>
+</html>

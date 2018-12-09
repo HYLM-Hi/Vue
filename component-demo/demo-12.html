@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.18-beta.0/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <child-component></child-component>
+</div>
+<script>
+    //异步组件例子,通过reslove回调。setTimeout这里仅仅作为例子，可替换成其它，如何获取组件取决于自己
+    Vue.component('child-component',function (resolve,reject) {
+        window.setTimeout(function () {
+            resolve({
+                template:"<div>这个一个异步的例子</div>"
+            })
+        },3000)
+    });
+
+    new Vue({
+        el:'#app',
+        //$nextTick的用法，等组件渲染完成后再获取组件的数据
+        created(){
+            this,$nextTick(()=>{
+
+            });
+        }
+    })
+</script>
+</body>
+</html>

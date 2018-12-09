@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.18-beta.0/vue.js"></script>
+</head>
+<body>
+<div id="app">
+
+</div>
+<script>
+    Vue.component('my-component',{
+        //props数字验证
+       props: {
+           propA:Number,//必须是数字类型
+           propB:[String,Number],//必须是字符串或数字类型
+           propC:{
+               type:Boolean,
+               default:true//这是正常写法，默认为什么类型。如果如propA缩写写法的话，default则为false
+           },
+           propD:{//数字，且是必传
+               type:Number,
+               required:true
+           },
+           propE:{//如果是数组或对象，默认值必须是一个函数来返回
+               type:Array,
+               default:function () {
+                   return [];
+               }
+           },
+           propF:{//自定义一个验证函数
+               validator:function (value) {
+                   return value>20;
+               }
+           }
+       }
+    });
+    new Vue({
+        el:'#app',
+
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.18-beta.0/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <com-a :count="1"></com-a>
+</div>
+<script>
+    //递归组件使用的两个条件：1、必须给组件取个名字。2、必须给组件一个限定条件，比如if=‘count<3’
+    Vue.component('com-a',{
+        name:'comA',
+        props:{
+            count:{
+                type:Number,
+                default:1
+            }
+        },
+        template:"<div><com-a :count='count +1' v-if='count <3'></com-a>{{count}}</div>"
+    });
+    new Vue({
+        el:'#app',
+    })
+</script>
+</body>
+</html>

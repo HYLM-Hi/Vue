@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.18-beta.0/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <app>
+        <div slot="a">
+            {{message}}
+        </div>
+        <div slot="b">你好</div>
+    </app>
+</div>
+<script>
+    //slot单个的用法,{{message}}的作用域和生命周期不属于app的组件而是app组件的父组件或者父实例，与app组件没有任何关系，{{message}}这个地方可替换成任何其它组件，然后将由slot充当。
+    //slot多个的用法，给slot取个名字
+    Vue.component('app',{
+        template:'\
+        <div>\
+            Hello\
+            <slot name="a"></slot>\
+            <slot name="b"></slot>\
+        </div>\
+        \
+        '
+    });
+    new Vue({
+        el:'#app',
+        data:{
+            message:'world'
+        }
+    })
+</script>
+</body>
+</html>

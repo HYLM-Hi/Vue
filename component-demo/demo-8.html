@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.18-beta.0/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{value}}
+    <my-com v-model="value"></my-com>
+    <button @click="handleMinus">-1</button>
+</div>
+<script>
+    //使用v-model，接受一个value属性，在有新的value时触发input事件
+    Vue.component('my-com',{
+       props:{
+           value:{
+               type:Number
+           }
+       },
+        template:'<div>{{currentValue}}<button @click="handleClick">+1</button></div>',
+        data(){
+           return{
+               currentValue:this.value
+           }
+        },
+        //监听
+        watch:{
+           value(val){
+               this.currentValue=val;
+           }
+        },
+        methods:{
+           handleClick(){
+               this.currentValue ++;
+               this.$emit('input',this.currentValue);
+           }
+        }
+    });
+    new Vue({
+        el:'#app',
+        data:{
+            value:1,
+        },
+        methods:{
+            handleMinus(){
+                this.value --;
+                console.log(this.value)
+            }
+        }
+
+    })
+</script>
+</body>
+</html>

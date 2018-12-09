@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>这是一个测试</h1>
+<ui style="display: flex">
+    <li>
+        <a href="img/1.png" onclick="showPic(this);return false" title="A fireworks display">1111111111</a>
+        <img src="img/1.png" alt="hh"/>
+   </li>
+    <li>
+        <a href="img/2.jpg" onclick="showPic(this);return false" title="A cup if black">2222222222</a>
+        <img src="img/2.jpg" alt="xx"/>
+    </li>
+    <li>
+        <a href="img/3.jpg" onclick="showPic(this);return false" title="A red">3333333333</a>
+        <img src="img/3.jpg" alt="cc"/>
+    </li>
+    <li>
+        <a href="img/4.jpg" onclick="showPic(this);return false" title="The famous">444444444444</a>
+        <img src="img/4.jpg" alt="bb"/>
+    </li>
+    <img id="placheholder" src="img/5.jpg" alt="my ing gallery">
+
+</ui>
+</body>
+<script>
+    // window加载完成之后执行,若有多个函数需等待window加载完成之后执行则队列即可
+    function addLoadEvent(func) {
+        let oldonload = window.onload;
+        if (typeof window.onload !="function"){
+            window.onload = func;
+        } else {
+            window.onload =function () {
+                oldonload();
+                func();
+            }
+        }
+    }
+    //之后插入函数，两个参数分别为新元素，目标元素。如果目标元素==父元素中的最后子元素则新元素插入其后。如果!=,那么新元素则插入父元素与父元素的下个兄弟元素之间。
+    function inserAfter(newElement,targetElement) {
+        let parent = targetElement.parentNode;
+        if (paren.lastChild == targetElement) {
+            parent.appendChild(newElement);
+        } else{
+            parent.insertBefore(newElement,targetElement.nextSibling)
+        }
+    }
+    addLoadEvent(preparePlaceholder);
+    addLoadEvent(prepareGallery);
+
+    function showPic(whichpic) {
+        let source =whichpic.getAttribute('href');
+        let placeholder = document.getElementById("placheholder");
+     placeholder.setAttribute("src",source);
+    }
+    function popUp(winURL) {
+        window.open(winURL,"popUp","width=320,height=480")
+    }
+
+    function countBody() {
+        let body_element = document.getElementsByTagName("body")[0];
+        alert(body_element.childNodes.length);
+
+    }
+
+</script>
+</html>

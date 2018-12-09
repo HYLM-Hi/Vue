@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.18-beta.0/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{message}}
+    <!--索引，如果有相同的多个组件，可以用过ref索引来拿取-->
+    <component-a ref="a"></component-a>
+    <component-a ref="b"></component-a>
+</div>
+<script>
+    //非父子组件间的通信的例子
+    const bus = new Vue();//首先创建一个实例
+
+    Vue.component('component-a',{
+        template:'<button @click="handleEvent">传递事件</button>',
+        methods:{
+            handleEvent(){
+                //通过父链来访问id为app的实例
+                this.$parent;
+                bus.$emit('on-message','来自组件com-a的通信');
+            }
+        }
+    });
+
+    new Vue({
+        el:'#app',
+        data:{
+            message:''
+        },
+        mounted(){
+            //通过子链来访问id为app的实例中所有的子组件
+            this.$children;
+            bus.$on('on-message',(bb)=>{
+                 this.message=bb;
+            })
+            //组件的ref设置好后，然后通过$refs来调用
+            this.$refs.a
+            this.$refs.b
+        }
+    })
+
+</script>
+</body>
+</html>
